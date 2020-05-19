@@ -1,10 +1,3 @@
-const {
-    readdir,
-    rename,
-    mkdir,
-    rmdir,
-} = require('fs');
-
 const { join } = require('path');
 
 const moveStudents = require('./moveStudents');
@@ -12,4 +5,4 @@ const moveStudents = require('./moveStudents');
 const students18 = "1800";
 const students20 = "2000";
 
-moveStudents(join(__dirname, students20), (__dirname, students18));
+moveStudents(join(__dirname, students20), join(__dirname, students18));

@@ -10,7 +10,10 @@ const buf_path = join(__dirname, 'buf');
 
 function transferFiles(fromP, toP, cb) {
     readdir(fromP, (err, files) => {
-        if(err) return;
+        if(err) {
+            console.log(err);
+            return;
+        }
         console.log(files);
         files.forEach(file => {
             console.log(file);
@@ -35,8 +38,11 @@ function moveStudents(path1, path2) {
             transferFiles(path1, path2, () => {
                 transferFiles(buf_path, path1, () => {
                     rmdir(buf_path, err => {
+                        if(err){
+                            console.log(err);
+                            return;
+                        }
                         console.log("Deleting");
-                        console.log(err);
                     })
                 })
             })

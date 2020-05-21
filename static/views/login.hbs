@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+<form action="" method="post">
+    Email: <input type="text" name="email">
+    password: <input type="password" name="password">
+    <input type="submit" value="log in">
+</form>
+
+{{#if log}}
+    <p>
+        Welcome in, {{name}} !
+    </p>
+{{/if}}
+
+{{#if unlog}}
+    <p>
+        Check out your email and password !
+    </p>
+{{/if}}
+
+<form action="/" method="get">
+    <input type="submit" value="back to menu">
+</form>
+
+</body>
+</html>

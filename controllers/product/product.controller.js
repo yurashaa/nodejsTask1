@@ -3,10 +3,10 @@ const {productService} = require('../../services');
 module.exports = {
     getProducts: async (req, res) => {
         try {
-            let products = await productService.getAllProducts();
+            const products = await productService.getAllProducts();
             res.json(products);
         } catch (e) {
-            res.write(e.message);
+            res.json(e.message);
         }
     },
 
@@ -44,6 +44,7 @@ module.exports = {
     updateProduct: async (req, res) => {
         try {
             const { id } = req.params;
+
             await productService.updateProduct(id, req.body);
             res.redirect('/products');
         } catch (e) {

@@ -43,7 +43,8 @@ module.exports = {
 
     updateProduct: async (req, res) => {
         try {
-            await productService.updateProduct(req.body);
+            const { id } = req.params;
+            await productService.updateProduct(id, req.body);
             res.redirect('/products');
         } catch (e) {
             res.json(e.message);

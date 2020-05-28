@@ -1,6 +1,8 @@
 const express = require('express');
 
 const { productRouter } = require('./routes');
+const db = require('./database').getInstance();
+db.setModels();
 
 const app = express();
 

@@ -1,13 +1,14 @@
 module.exports = (req, res, next) => {
     try {
-        const {id, name, price} = req.body;
+        let {name, price} = req.body;
 
-        if (!id || !name || !price) {
+
+        if ( !name || !price) {
             throw new Error('Not valid data');
         }
 
-        if (id < 1) {
-            throw new Error('Id is not valid');
+        if(name.length < 2){
+            throw new Error('Name is too short');
         }
 
         if (price < 0) {

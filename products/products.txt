@@ -1,1 +1,0 @@
-[{"id":4,"name":"pineapple","price":40},{"id":7,"name":"orange","price":20},{"id":10,"name":"pineapple","price":40},{"id":11,"name":"pineapple","price":40},{"id":13,"name":"pineapple","price":40},{"id":14,"name":"pineapple","price":40},{"id":15,"name":"pineapple","price":40},{"id":16,"name":"pineapple","price":40},{"id":17,"name":"pineapple","price":40}]

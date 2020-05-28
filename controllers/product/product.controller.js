@@ -15,7 +15,7 @@ module.exports = {
             const {id} = req.params;
 
             const productById = await productService.getProductById(id);
-            res.json(productById);
+            productById ? res.json(productById) : res.json({findById: false});
         } catch (e) {
             res.json(e.message);
         }
@@ -34,8 +34,8 @@ module.exports = {
         try {
             const { id } = req.params;
 
-            await productService.deleteProductById(+id);
-            res.redirect('/products');
+            const isDeleted = await productService.deleteProductById(+id);
+            isDeleted ? res.redirect('/products') : res.json({deleted: false});
         } catch (e) {
             res.json(e.message);
         }
@@ -45,8 +45,8 @@ module.exports = {
         try {
             const { id } = req.params;
 
-            await productService.updateProduct(id, req.body);
-            res.redirect('/products');
+            const [isUpdated] = await productService.updateProduct(id, req.body);
+            isUpdated ? res.redirect('/products') : res.json({updated: false});
         } catch (e) {
             res.json(e.message);
         }

@@ -1,23 +1,15 @@
+const Joi = require('joi');
+
+const ErrorHandler = require('../error/ErrorHandler');
+const {productValidatorSchema} = require('../validators');
+
 module.exports = (req, res, next) => {
-    try {
-        let {name, price} = req.body;
+        const {error} = Joi.validate(req.body, productValidatorSchema);
 
-
-        if ( !name || !price) {
-            throw new Error('Not valid data');
-        }
-
-        if(name.length < 2){
-            throw new Error('Name is too short');
-        }
-
-        if (price < 0) {
-            throw new Error('Price is not valid');
+        if(error) {
+            return next(new ErrorHandler(error.details[0].message, 400, 4001));
         }
 
         next();
-    } catch (e) {
-        console.log(e.message);
-        res.json(e.message);
-    }
 };
+

@@ -1,12 +1,21 @@
+const {productService} = require('../services');
+const ErrorHandler = require('../error/ErrorHandler');
+const {errorsEnum: {ERR_NO_PRODUCT_ID}} = require('../constants');
+
 module.exports = async (req, res, next) => {
     try{
-        let { id } = req.params;
+        const { productId } = req.params;
 
-        if(+id < 0 || isNaN(id))
-            throw new Error('No element with this id');
+        const product = await productService.getProductById(productId);
+
+        if(!product){
+            return next(new ErrorHandler(ERR_NO_PRODUCT_ID), 404, 4041);
+        }
+
+        req.product = product;
 
         next();
     } catch (e) {
-        res.json(e.message);
+        next(new ErrorHandler(e.message));
     }
 };

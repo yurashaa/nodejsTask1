@@ -1,54 +1,52 @@
 const {productService} = require('../../services');
+const {hashCodeWord} = require('../../helpers');
+const ErrorHandler = require('../../error/ErrorHandler');
 
 module.exports = {
-    getProducts: async (req, res) => {
+    getProducts: async (req, res, next) => {
         try {
             const products = await productService.getAllProducts();
+
             res.json(products);
         } catch (e) {
-            res.json(e.message);
+            next(new ErrorHandler(e.message));
         }
     },
 
     getProductById: async (req, res) => {
-        try {
-            const {id} = req.params;
-
-            const productById = await productService.getProductById(id);
-            productById ? res.json(productById) : res.json({findById: false});
-        } catch (e) {
-            res.json(e.message);
-        }
+            res.json(req.product);
     },
 
-    createProduct: async (req, res) => {
+    createProduct: async (req, res, next) => {
         try {
+            req.body.codeWord = await hashCodeWord(req.body.codeWord);
+
             await productService.createNewProduct(req.body);
             res.redirect('/products');
         } catch (e) {
-            res.json(e.message);
+            next(new ErrorHandler(e.message));
         }
     },
 
-    deleteProduct: async (req, res) => {
+    deleteProduct: async (req, res, next) => {
         try {
-            const { id } = req.params;
+            const {productId} = req.params;
 
-            const isDeleted = await productService.deleteProductById(+id);
-            isDeleted ? res.redirect('/products') : res.json({deleted: false});
+            await productService.deleteProductById(+productId);
+            res.sendStatus(204);
         } catch (e) {
-            res.json(e.message);
+            next(new ErrorHandler(e.message));
         }
     },
 
-    updateProduct: async (req, res) => {
+    updateProduct: async (req, res, next) => {
         try {
-            const { id } = req.params;
+            const {productId} = req.params;
 
-            const [isUpdated] = await productService.updateProduct(id, req.body);
-            isUpdated ? res.redirect('/products') : res.json({updated: false});
+            await productService.updateProduct(productId, req.body);
+            res.sendStatus(204);
         } catch (e) {
-            res.json(e.message);
+            next(new ErrorHandler(e.message));
         }
     }
 };

@@ -8,7 +8,7 @@ class ProductService {
         return ProductModel.findAll({});
     }
 
-    async createNewProduct(newProduct){
+    createNewProduct(newProduct){
         const ProductModel = db.getModel(PRODUCT);
         return ProductModel.create(newProduct);
     }

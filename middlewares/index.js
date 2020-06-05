@@ -1,2 +1,3 @@
-module.exports.dataValidity = require('./check-is-product-valid');
-module.exports.isIdExists = require('./check-if-id-exists');
+module.exports.authMiddlewares = require('./auth');
+module.exports.productMiddlewares = require('./product');
+module.exports.userMiddlewares = require('./user');

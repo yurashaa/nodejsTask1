@@ -1,6 +1,6 @@
 const {productService} = require('../../services');
-const {hashCodeWord} = require('../../helpers');
-const ErrorHandler = require('../../error/ErrorHandler');
+const {hash} = require('../../helpers');
+const {ErrorHandler} = require('../../error');
 
 module.exports = {
     getProducts: async (req, res, next) => {
@@ -19,7 +19,7 @@ module.exports = {
 
     createProduct: async (req, res, next) => {
         try {
-            req.body.codeWord = await hashCodeWord(req.body.codeWord);
+            req.body.codeWord = await hash(req.body.codeWord);
 
             await productService.createNewProduct(req.body);
             res.redirect('/products');

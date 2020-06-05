@@ -1,7 +1,7 @@
 const {Router} = require('express');
 
 const {productController} = require('../../controllers');
-const { dataValidity, isIdExists } = require('../../middlewares');
+const { productMiddlewares: {dataValidity, isIdExists} } = require('../../middlewares');
 
 const productRouter = Router();
 

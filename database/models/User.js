@@ -1,11 +1,17 @@
 const {tableNamesEnum, modelNamesEnum} = require('../../constants');
 
 module.exports = (sequelize, DataTypes) => {
-    const Product = sequelize.define(modelNamesEnum.PRODUCT, {
+    const User = sequelize.define(modelNamesEnum.USER, {
         id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true,
+        },
+
+        email: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            unique: true,
         },
 
         name: {
@@ -13,25 +19,20 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
         },
 
-        price: {
+        age: {
             type: DataTypes.INTEGER,
-            allowNull: false,
+            allowNull: false
         },
 
-        discount: {
-            type: DataTypes.INTEGER,
-            allowNull: true,
-        },
-
-        codeWord: {
+        password: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: false
         }
+    },
+        {
+            tableName: tableNamesEnum.USER,
+            timestamps: false,
+        });
 
-    }, {
-        tableName: tableNamesEnum.PRODUCT,
-        timestamps: false
-    });
-
-    return Product;
+    return User;
 };

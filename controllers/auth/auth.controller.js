@@ -1,7 +1,13 @@
-const {ErrorHandler, errorsEnum} = require('../../error');
+const {
+    ErrorHandler,
+    errorsEnum: {ERR_NOT_FOUND}
+} = require('../../error');
 const {checkHash, createTokens} = require('../../helpers');
 const {authService, userService} = require('../../services');
-const {responseStatusCode, requestHeadersEnum} = require('../../constants');
+const {
+    responseStatusCode: {NOT_FOUND, OK},
+    requestHeadersEnum: {AUTHORIZATION}
+} = require('../../constants');
 
 module.exports = {
     login: async (req, res, next) => {
@@ -23,11 +29,11 @@ module.exports = {
 
     logout: async (req, res, next) => {
         try {
-            const access_token = req.get(requestHeadersEnum.AUTHORIZATION);
+            const access_token = req.get(AUTHORIZATION);
 
             await authService.deleteByParams({access_token});
 
-            res.sendStatus(200);
+            res.sendStatus(OK);
         } catch (e) {
             next(new ErrorHandler(e.message))
         }
@@ -36,15 +42,15 @@ module.exports = {
     refresh: async (req, res, next) => {
         try {
             const {user_id} = req;
-            const refresh_token = req.get(requestHeadersEnum.AUTHORIZATION);
+            const refresh_token = req.get(AUTHORIZATION);
 
             const user = await userService.getUserById(user_id);
 
-            if(!user) {
+            if (!user) {
                 return next(new ErrorHandler(
-                    errorsEnum.ERR_NOT_FOUND.msg,
-                    responseStatusCode.NOT_FOUND,
-                    errorsEnum.ERR_NOT_FOUND.code
+                    ERR_NOT_FOUND.msg,
+                    NOT_FOUND,
+                    ERR_NOT_FOUND.code
                 ));
             }
 
@@ -53,7 +59,7 @@ module.exports = {
             await authService.deleteByParams({refresh_token});
             await authService.createTokensPair(user.id, tokens);
 
-            res.sendStatus(200);
+            res.sendStatus(OK);
         } catch (e) {
             next(new ErrorHandler(e.message))
         }

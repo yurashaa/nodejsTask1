@@ -1,6 +1,9 @@
-const {ErrorHandler, errorsEnum} = require('../../error');
+const {
+    ErrorHandler,
+    errorsEnum: {ERR_NO_USER}
+} = require('../../error');
 const {userService} = require('../../services');
-const {responseStatusCode} = require('../../constants');
+const {responseStatusCode: {NOT_FOUND}} = require('../../constants');
 
 module.exports = async (req, res, next) => {
     try {
@@ -9,9 +12,9 @@ module.exports = async (req, res, next) => {
 
         if(!user) {
             return next(new ErrorHandler(
-                errorsEnum.ERR_NO_USER.msg,
-                responseStatusCode.NOT_FOUND,
-                errorsEnum.ERR_NO_USER.code
+                ERR_NO_USER.msg,
+                NOT_FOUND,
+                ERR_NO_USER.code
             ));
         }
 
@@ -20,9 +23,9 @@ module.exports = async (req, res, next) => {
         next();
     } catch (e) {
         next(new ErrorHandler(
-            errorsEnum.ERR_NO_USER.msg,
-            responseStatusCode.NOT_FOUND,
-            errorsEnum.ERR_NO_USER.code
+            ERR_NO_USER.msg,
+            NOT_FOUND,
+            ERR_NO_USER.code
         ));
     }
 };

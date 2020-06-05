@@ -1,17 +1,24 @@
-const {requestHeadersEnum, responseStatusCode, wordsEnum} = require('../../constants');
-const {ErrorHandler, errorsEnum} = require('../../error');
+const {
+    requestHeadersEnum: {AUTHORIZATION},
+    responseStatusCode: {UNAUTHORIZED},
+    wordsEnum
+} = require('../../constants');
+const {
+    ErrorHandler,
+    errorsEnum: {ERR_NOT_VALID_TOKEN}
+} = require('../../error');
 const {tokenVerificator} = require('../../helpers');
 const {authService} = require('../../services');
 
 module.exports = async (req, res, next) => {
     try {
-        const access_token = req.get(requestHeadersEnum.AUTHORIZATION);
+        const access_token = req.get(AUTHORIZATION);
 
-        if(!access_token) {
+        if (!access_token) {
             return next(new ErrorHandler(
-                errorsEnum.ERR_NOT_VALID_TOKEN.msg,
-                responseStatusCode.UNAUTHORIZED,
-                errorsEnum.ERR_NOT_VALID_TOKEN.code
+                ERR_NOT_VALID_TOKEN.msg,
+                UNAUTHORIZED,
+                ERR_NOT_VALID_TOKEN.code
             ));
         }
 
@@ -19,11 +26,11 @@ module.exports = async (req, res, next) => {
 
         const tokensDB = await authService.getTokensByParams({access_token});
 
-        if(!tokensDB) {
+        if (!tokensDB) {
             return next(new ErrorHandler(
-                errorsEnum.ERR_NOT_VALID_TOKEN.msg,
-                responseStatusCode.UNAUTHORIZED,
-                errorsEnum.ERR_NOT_VALID_TOKEN.code
+                ERR_NOT_VALID_TOKEN.msg,
+                UNAUTHORIZED,
+                ERR_NOT_VALID_TOKEN.code
             ));
         }
 

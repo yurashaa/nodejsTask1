@@ -18,11 +18,6 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
         },
 
-        discount: {
-            type: DataTypes.INTEGER,
-            allowNull: true,
-        },
-
         codeWord: {
             type: DataTypes.STRING,
             allowNull: false,

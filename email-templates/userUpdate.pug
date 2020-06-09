@@ -1,0 +1,10 @@
+extends template
+block content
+    div
+        |Your data was updated:
+        if name
+            br
+            |new Name is #{name}
+        if age
+            br
+            |new Age is #{age}

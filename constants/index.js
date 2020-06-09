@@ -1,3 +1,4 @@
+module.exports.actionsEnum = require('./actions.enum');
 module.exports.modelNamesEnum = require('./modelNames.enum');
 module.exports.regexEnum = require('./regex.enum');
 module.exports.responseStatusCode = require('./responseStatusCodes.enum');

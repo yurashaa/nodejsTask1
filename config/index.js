@@ -10,6 +10,5 @@ module.exports = {
     DB_NAME: process.env.DB_NAME || 'shop',
     DB_USER_NAME: process.env.DB_USER_NAME || 'root',
     DB_PASSWORD: process.env.DB_PASSWORD || 'root',
-    HOST: process.env.HOST || 'localhost',
-    DIALECT: process.env.DIALECT || 'mysql'
+    HOST: process.env.HOST || 'localhost'
 };

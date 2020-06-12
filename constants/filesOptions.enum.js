@@ -1,12 +1,7 @@
 module.exports = {
     PHOTO_MIMETYPES: [
-        'image/jpeg',
         'image/jpg',
-        // 'image/gif',
-        // 'image/bmp',
         'image/png',
-        // 'image/tiff',
-        // 'image/webp'
     ],
     DOC_MIMETYPES: [
         'application/msword',

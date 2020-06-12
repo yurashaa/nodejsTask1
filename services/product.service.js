@@ -8,14 +8,19 @@ class ProductService {
         return ProductModel.findAll({});
     }
 
-    createNewProduct(newProduct){
-        const ProductModel = db.getModel(PRODUCT);
-        return ProductModel.create(newProduct);
-    }
-
     getProductById(id) {
         const ProductModel = db.getModel(PRODUCT);
         return ProductModel.findByPk(id);
+    }
+
+    getProductsByParams(params) {
+        const ProductModel = db.getModel(PRODUCT);
+        return ProductModel.findAll({where: params});
+    }
+
+    createNewProduct(newProduct){
+        const ProductModel = db.getModel(PRODUCT);
+        return ProductModel.create(newProduct);
     }
 
     deleteProductById(id) {

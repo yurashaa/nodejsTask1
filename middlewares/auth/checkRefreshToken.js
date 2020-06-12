@@ -36,6 +36,6 @@ module.exports = async (req, res, next) => {
         req.user_id = tokensDB.user_id;
         next();
     } catch (e) {
-        next(new ErrorHandler(e.message))
+        next(new ErrorHandler(e))
     }
 };

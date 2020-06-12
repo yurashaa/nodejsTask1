@@ -6,4 +6,6 @@ module.exports = {
     PRODUCT_ADD: '3',
     PRODUCT_UPDATE: '4',
     PRODUCT_DELETE: '5',
+
+    NOTIFY_USERS: '6',
 };

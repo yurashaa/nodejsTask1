@@ -2,6 +2,12 @@ const db = require('../database').getInstance();
 const {modelNamesEnum: {TOKENS}} = require('../constants');
 
 class AuthService {
+    getAllTokens() {
+        const TokensModel = db.getModel(TOKENS);
+
+        return TokensModel.findAll({});
+    }
+
     getTokensByParams(params) {
         const TokensModel = db.getModel(TOKENS);
 

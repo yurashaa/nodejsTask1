@@ -1,3 +1,4 @@
 module.exports.dataValidity = require('./checkIsProductValid');
 module.exports.updateValidity = require('./checkIsUpdateProductValid');
-module.exports.isIdExists = require('./checkIfIdExists');
+module.exports.isProductIdExists = require('./checkIsProductIdExists');
+module.exports.isProductBelongsUser = require('./checkisProductBelongsUser');

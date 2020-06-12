@@ -29,5 +29,10 @@ module.exports = {
     [actionsEnum.PRODUCT_DELETE]: {
         subject: '[NODE.JS] DELETED PRODUCT',
         template: 'productDelete'
+    },
+
+    [actionsEnum.NOTIFY_USERS]: {
+        subject: '[NODE.JS] NOTIFICATION',
+        template: 'noPhotoProducts'
     }
 };

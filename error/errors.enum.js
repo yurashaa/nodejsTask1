@@ -24,6 +24,16 @@ module.exports = {
         code: 4005,
     },
 
+    ERR_NOT_VALID_FILES: {
+        msg: 'Not valid files',
+        code: 4006,
+    },
+
+    ERR_NO_PHOTO: {
+        msg: 'There is no photo',
+        code: 4007
+    },
+
     ERR_NOT_VALID_TOKEN: {
         msg: 'Token is not valid',
         code: 4011,

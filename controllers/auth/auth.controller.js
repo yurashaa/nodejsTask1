@@ -23,7 +23,7 @@ module.exports = {
 
             res.json(tokens);
         } catch (e) {
-            next(new ErrorHandler(e.message))
+            next(new ErrorHandler(e))
         }
     },
 
@@ -35,7 +35,7 @@ module.exports = {
 
             res.sendStatus(OK);
         } catch (e) {
-            next(new ErrorHandler(e.message))
+            next(new ErrorHandler(e))
         }
     },
 
@@ -59,9 +59,9 @@ module.exports = {
             await authService.deleteByParams({refresh_token});
             await authService.createTokensPair(user.id, tokens);
 
-            res.sendStatus(OK);
+            res.sendStatus(tokens);
         } catch (e) {
-            next(new ErrorHandler(e.message))
+            next(new ErrorHandler(e))
         }
     }
 };

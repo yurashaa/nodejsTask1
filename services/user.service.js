@@ -1,3 +1,5 @@
+const Sequelize = require('sequelize');
+
 const db = require('../database').getInstance();
 const {modelNamesEnum: {USER}} = require('../constants');
 
@@ -13,6 +15,21 @@ class UserService {
         const UserModel = db.getModel(USER);
 
         return UserModel.findByPk(id);
+    }
+
+    getUserByParams(params) {
+        const UserModel = db.getModel(USER);
+
+        return UserModel.findOne({where: params})
+    }
+
+    getUsersByIds(ids) {
+        const UserModel = db.getModel(USER);
+
+        return UserModel.findAll({where: {
+            id: {
+                    [Sequelize.Op.or]: ids,
+                }}});
     }
 
     createNewUser(newUser) {
@@ -35,12 +52,6 @@ class UserService {
                 id,
             }
         })
-    }
-
-    getUserByParams(params) {
-        const UserModel = db.getModel(USER);
-
-        return UserModel.findOne({where: params});
     }
 }
 

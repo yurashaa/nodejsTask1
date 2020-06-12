@@ -2,20 +2,40 @@ const {Router} = require('express');
 
 const {productController} = require('../../controllers');
 const {
-    productMiddlewares: {dataValidity, isIdExists, updateValidity},
+    productMiddlewares: {dataValidity, isProductIdExists, updateValidity, isProductBelongsUser},
     authMiddlewares: {checkAccessToken},
+    fileMiddlewares: {checkFiles, checkFilesCount, isProductPhotoExists}
 } = require('../../middlewares');
 
 const productRouter = Router();
 
 productRouter.get('/', productController.getProducts);
 
-productRouter.get('/:productId',isIdExists, productController.getProductById);
+productRouter.get('/:productId',isProductIdExists, productController.getProductById);
 
-productRouter.post('/', dataValidity, checkAccessToken, productController.createProduct);
+productRouter.post('/',
+    dataValidity,
+    checkAccessToken,
+    checkFiles,
+    checkFilesCount,
+    productController.createProduct);
 
-productRouter.delete('/:productId', checkAccessToken, isIdExists, productController.deleteProduct);
+productRouter.delete('/:productId/delete-photo',
+    checkAccessToken,
+    isProductIdExists,
+    isProductBelongsUser,
+    isProductPhotoExists,
+    productController.deletePhoto);
 
-productRouter.put('/:productId', updateValidity, checkAccessToken, isIdExists, productController.updateProduct);
+productRouter.delete('/:productId', checkAccessToken, isProductIdExists, productController.deleteProduct);
+
+productRouter.put('/:productId',
+    updateValidity,
+    checkAccessToken,
+    isProductIdExists,
+    isProductBelongsUser,
+    checkFiles,
+    checkFilesCount,
+    productController.updateProduct);
 
 module.exports = productRouter;

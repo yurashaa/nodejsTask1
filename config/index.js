@@ -12,5 +12,5 @@ module.exports = {
     DB_PASSWORD: process.env.DB_PASSWORD || 'root',
     HOST: process.env.HOST || 'localhost',
 
-    CRON_JOB_PERIOD: '0 15 * * *'
+    CRON_JOB_PERIOD: process.env.CRON_JOB_PERIOD || '0 15 * * *',
 };
